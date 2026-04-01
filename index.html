@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Love Test 😏</title>
+
+<style>
+  body {
+    font-family: Arial;
+    background: #ffe6f0;
+    text-align: center;
+    padding: 50px;
+    overflow: hidden;
+  }
+        
+  .box {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    display: inline-block;
+  }
+
+  input, textarea {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  #yes { background: #4CAF50; color: white; position: absolute; }
+  #no { background: #f44336; color: white; position: absolute; }
+
+  .hidden { display: none; }
+</style>
+</head>
+
+<body>
+
+<!-- FORM -->
+<div id="formBox" class="box">
+  <h2>Fill this honestly 😏💖</h2>
+
+  <form id="loveForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <input type="text" name="name" placeholder="Your Name 😌" required><br>
+    <input type="text" name="gf_name" placeholder="Your GF Name 💖" required><br>
+    <textarea name="why_love" placeholder="Why do you love me? 😏" required></textarea><br>
+    <textarea name="promise" placeholder="One promise to me 💍"></textarea><br>
+
+    <button type="button" onclick="startTrap()">Continue 😏</button>
+  </form>
+</div>
+
+<!-- LOVE QUESTION -->
+<div id="trap" class="hidden">
+  <h1 id="question">Do you love me? 😏</h1>
+
+  <button id="yes">Yes 💖</button>
+  <button id="no">No 😒</button>
+</div>
+
+<script>
+let noClicks = 0;
+
+const formBox = document.getElementById("formBox");
+const trap = document.getElementById("trap");
+const question = document.getElementById("question");
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+
+// start trap after form
+function startTrap() {
+  formBox.classList.add("hidden");
+  trap.classList.remove("hidden");
+
+  yesBtn.style.left = "40%";
+  yesBtn.style.top = "60%";
+
+  noBtn.style.left = "55%";
+  noBtn.style.top = "60%";
+}
+
+// YES → submit form
+yesBtn.onclick = function() {
+  question.innerText = "Good boy 😌💖 Sending your answers...";
+
+  setTimeout(() => {
+    document.getElementById("loveForm").submit();
+  }, 1500);
+};
+
+// NO button escapes
+noBtn.onmouseover = moveButton;
+noBtn.onclick = function() {
+  noClicks++;
+
+  if (noClicks === 1) {
+    question.innerText = "Are you sure? 🤨";
+  } 
+  else if (noClicks === 2) {
+    question.innerText = "Think again 😤";
+  } 
+  else if (noClicks === 3) {
+    question.innerText = "Bitch you mine, got it 😡❤️";
+  } 
+  else {
+    question.innerText = "JUST CLICK YES 😭";
+  }
+
+  moveButton();
+};
+
+function moveButton() {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+</script>
+
+</body>
+</html>
